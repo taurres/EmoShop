@@ -1,28 +1,28 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Row, Col} from "react-bootstrap";
-import Product from "../components/Product";
-import {listProducts} from "../actions/productActions";
-import Loader from "../components/Loader";
-import Message from "../components/Message";
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Col, Row } from 'react-bootstrap'
+import Product from '../components/Product'
+import { listProducts } from '../actions/productActions'
+import Loader from '../components/Loader'
+import Message from '../components/Message'
 
 const HomeScreen = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
     useEffect(() => {
         //use redux to get product list
-        dispatch(listProducts());
-    }, [dispatch]);
+        dispatch(listProducts())
+    }, [dispatch])
+
 
     // reduce the productList data from redux store
-    const productList = useSelector(state => state.productList);
-    const {loading, products, error} = productList;
-
+    const productList = useSelector(state => state.productList)
+    const {loading, products, error} = productList
 
     return (
         <>
             <h1>Latest Products</h1>
-            {loading ? <Loader/> : error ? <Message variant='danger'>{error}</Message> :
+            {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> :
                 <Row>
                     {products.map(product => (
                         <Col key={product._id} sm={12} md={6} lg={4}>
@@ -31,9 +31,8 @@ const HomeScreen = () => {
                     ))}
                 </Row>
             }
-
         </>
-    );
+    )
 }
 
-export default HomeScreen;
+export default HomeScreen
