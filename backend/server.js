@@ -1,8 +1,10 @@
 import express from 'express'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
-import productRoutes from './routes/productRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
+import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+
 
 dotenv.config()
 
@@ -10,13 +12,19 @@ connectDB()
 
 const app = express()
 
+// handle json body
+app.use(express.json())
 
+// handler for index
 app.get('/', (req, res) => {
     res.send('API is running')
 })
 
 // handler for products
 app.use('/api/products', productRoutes)
+
+// handler for users
+app.use('/api/users', userRoutes)
 
 // handler for 404 not found
 app.use(notFound)
