@@ -64,6 +64,7 @@ export const authUser = expressAsyncHandler(async (req, res) => {
 // @route   GET /api/users/login
 // @access  Private
 export const getUserProfile = expressAsyncHandler(async (req, res) => {
+    // req.user is defined in authMiddleware
     const user = await User.findById(req.user._id)
     if (user) {
         res.json({
@@ -71,6 +72,34 @@ export const getUserProfile = expressAsyncHandler(async (req, res) => {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
+        })
+    } else {
+        res.status(401)
+        throw new Error('User not found')
+    }
+})
+
+// @desc    Update user profile
+// @route   PUT /api/users/profile
+// @access  Private
+export const updateUserProfile = expressAsyncHandler(async (req, res) => {
+    // get user by id
+    const user = await User.findById(req.user._id)
+    // update the updated attributes
+    if (user) {
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+        if (req.body.password) {
+            user.password = req.body.password
+        }
+        // save the updated user
+        const updatedUser = await user.save()
+        // return the updated user
+        res.json({
+            _id: updatedUser._id,
+            name: updatedUser.name,
+            email: updatedUser.email,
+            isAdmin: updatedUser.isAdmin,
         })
     } else {
         res.status(401)
