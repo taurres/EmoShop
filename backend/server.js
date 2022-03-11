@@ -4,6 +4,7 @@ import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
 
 
 dotenv.config()
@@ -25,6 +26,12 @@ app.use('/api/products', productRoutes)
 
 // handler for users
 app.use('/api/users', userRoutes)
+
+// handler for order
+app.use('/api/orders', orderRoutes)
+
+// handler for paypal, send paypal client id
+app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
 
 // handler for 404 not found
 app.use(notFound)

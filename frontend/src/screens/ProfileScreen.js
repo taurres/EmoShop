@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form, Button, Table } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { listMyOrders } from '../actions/orderActions'
 
 const ProfileScreen = () => {
     const [name, setName] = useState('')
@@ -13,7 +15,6 @@ const ProfileScreen = () => {
     const [confirmPassword, setConfirmPassword] = useState('')
     const [message, setMessage] = useState(null)
 
-    const [searchParams] = useSearchParams()
 
     const dispatch = useDispatch()
 
@@ -31,6 +32,10 @@ const ProfileScreen = () => {
     const userUpdateProfile = useSelector(state => state.userUpdateProfile)
     const {success} = userUpdateProfile
 
+    // get my orders
+    const myOrders = useSelector(state => state.listMyOrders)
+    const {loading: loadingOrders, orders, error: errorOrders} = myOrders
+
     useEffect(() => {
         // if no login user, redirect to login page
         if (!userInfo) {
@@ -39,6 +44,7 @@ const ProfileScreen = () => {
             // if no user detail, get user details first
             if (!user.name) {
                 dispatch(getUserDetails('profile'))
+                dispatch(listMyOrders())
             } else {
                 // if have use detail, update the state
                 setName(user.name)
@@ -113,6 +119,40 @@ const ProfileScreen = () => {
             </Col>
             <Col md={9}>
                 <h2>my orders</h2>
+                {loadingOrders ? <Loader/> : errorOrders
+                    ? <Message variant="danger">{errorOrders}</Message>
+                    : <Table striped bordered hover responsive className="table-sm text-center">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>Delivered</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {orders.map(order => (
+                            <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.createdAt.substring(0, 10)}</td>
+                                <td>{order.totalPrice}</td>
+                                <td>{order.isPaid ? order.paidAt.substring(0, 10) :
+                                    <i className="fa-solid fa-circle-xmark" style={{color: 'red'}}></i>}
+                                </td>
+                                <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) :
+                                    <i className="fa-solid fa-circle-xmark" style={{color: 'red'}}></i>}
+                                </td>
+                                <td>
+                                    <LinkContainer to={`/orders/${order._id}`}>
+                                        <Button className="btn-sm" variant="primary">Details</Button>
+                                    </LinkContainer>
+                                </td>
+                            </tr>
+                        ))}
+                        < /tbody>
+                    </Table>
+                }
             </Col>
         </Row>
     )

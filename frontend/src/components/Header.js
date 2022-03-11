@@ -15,10 +15,6 @@ const Header = () => {
         dispatch(logout())
     }
 
-    // useEffect(() => {
-    //     console.log(userInfo)
-    // }, [userInfo])
-
     return (
         <header>
             <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>

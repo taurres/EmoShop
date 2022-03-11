@@ -1,11 +1,10 @@
 import express from 'express'
-import expressAsyncHandler from 'express-async-handler'
-import { authUser, getUserProfile, registerUser, updateUserProfile } from '../controllers/userController.js'
-import { protect } from '../middleware/authMiddleware.js'
+import { authUser, getUserProfile, getUsers, registerUser, updateUserProfile } from '../controllers/userController.js'
+import { admin, protect } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
 
-router.route('/').post(registerUser)
+router.route('/').post(registerUser).get(protect, admin, getUsers)
 router.post('/login', authUser)
 
 // authenticate user by token before getting/updating user profile
