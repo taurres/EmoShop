@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import path from 'path'
 import morgan from 'morgan'
 import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
@@ -22,10 +23,6 @@ if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'))
 }
 
-// handler for index
-app.get('/', (req, res) => {
-    res.send('API is running')
-})
 
 // handler for products
 app.use('/api/products', productRoutes)
@@ -38,6 +35,22 @@ app.use('/api/orders', orderRoutes)
 
 // handler for paypal, send paypal client id
 app.get('/api/config/paypal', (req, res) => res.send(process.env.PAYPAL_CLIENT_ID))
+
+// get the current root path
+const __dirname = path.resolve()
+
+// for production
+if (process.env.NODE_ENV = 'production') {
+    // server files in /frontend/build
+    app.use(express.static(path.join(__dirname, '/frontend/build')))
+    // for other url, go to index.html
+    app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html')))
+} else {
+    // handler for index
+    app.get('/', (req, res) => {
+        res.send('API is running')
+    })
+}
 
 // handler for 404 not found
 app.use(notFound)

@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import Message from '../components/Message'
 import { createProductReview, listProductDetails } from '../actions/productActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
+import Meta from '../components/Meta'
 
 const ProductScreen = () => {
     const dispatch = useDispatch()
@@ -56,6 +57,7 @@ const ProductScreen = () => {
         <>
             <Link className="btn btn-primary my-3" to="/">Back</Link>
             {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : (<>
+                <Meta title={product.name}/>
                 <Row>
                     <Col md={6}>
                         <Image src={product.image} alt={product.name} fluid/>
