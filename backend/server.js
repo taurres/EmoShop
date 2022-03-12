@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import morgan from 'morgan'
 import connectDB from './config/db.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import productRoutes from './routes/productRoutes.js'
@@ -15,6 +16,12 @@ const app = express()
 
 // handle json body
 app.use(express.json())
+
+// handler for api logging
+if (process.env.NODE_ENV === 'development') {
+    console.log('debug')
+    app.use(morgan('dev'))
+}
 
 // handler for index
 app.get('/', (req, res) => {
@@ -38,6 +45,7 @@ app.use(notFound)
 
 // handler for 500 internal error
 app.use(errorHandler)
+
 
 const PORT = process.env.PORT || 5001
 
