@@ -19,7 +19,6 @@ app.use(express.json())
 
 // handler for api logging
 if (process.env.NODE_ENV === 'development') {
-    console.log('debug')
     app.use(morgan('dev'))
 }
 

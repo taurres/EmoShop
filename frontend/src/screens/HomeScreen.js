@@ -5,14 +5,17 @@ import Product from '../components/Product'
 import { listProducts } from '../actions/productActions'
 import Loader from '../components/Loader'
 import Message from '../components/Message'
+import { useParams } from 'react-router-dom'
 
 const HomeScreen = () => {
     const dispatch = useDispatch()
 
+    const keyword = useParams().keyword
+
     useEffect(() => {
         //use redux to get product list
-        dispatch(listProducts())
-    }, [dispatch])
+        dispatch(listProducts(keyword))
+    }, [dispatch, keyword])
 
 
     // reduce the productList data from redux store
