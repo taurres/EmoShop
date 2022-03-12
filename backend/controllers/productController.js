@@ -5,14 +5,25 @@ import Product from '../models/productModel.js'
 // @route   GET /api/products?keyword=''
 // @access  Public
 export const getProducts = expressAsyncHandler(async (req, res) => {
+    const pageSize = 3
+    const page = Number(req.query.pageNumber) || 1
+
     const keyword = req.query.keyword ? {
         name: {
             $regex: req.query.keyword,
             $options: 'i'
         }
     } : {}
-    const products = await Product.find({...keyword})
-    res.json(products)
+    // find out the total number of products
+    const count = await Product.countDocuments({...keyword})
+    // skip all previous pages and can the pageSize of products
+    const products = await Product
+        .find({...keyword})
+        .limit(pageSize)
+        .skip(pageSize * (page - 1))
+
+    // return product list, current page, and total number of pages
+    res.json({products, page, pages: Math.ceil(count / pageSize)})
 })
 
 // @desc    Fetch single product
@@ -68,5 +79,14 @@ export const createProductReview = expressAsyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Product not found')
     }
+})
+
+// @desc    get top rated products
+// @route   GET /api/products/top
+// @access  public
+export const getTopProducts = expressAsyncHandler(async (req, res) => {
+    const products = await Product.find({}).sort({rating: -1}).limit(3)
+
+    res.json(products)
 })
 
