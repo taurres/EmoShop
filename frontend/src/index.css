@@ -40,6 +40,13 @@ h1 {
     opacity: 0.5;
 }
 
+@media (max-width: 900px) {
+    .carousel-caption h2 {
+        font-size: 2.5vw;
+    }
+}
+
+
 .carousel img {
     max-height: 700px;
     width: fit-content;
@@ -59,9 +66,4 @@ h1 {
     margin: 0 auto;
 }
 
-/*@media (max-width: 900px) {*/
-/*    .carousel-caption h2 {*/
-/*        font-size: 2.5vw;*/
-/*    }*/
-/*}*/
 
