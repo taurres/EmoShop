@@ -13,7 +13,7 @@ const LoginScreen = () => {
 
     const [searchParams] = useSearchParams()
     // get the redirect path if exists else go to home page
-    const redirect = searchParams.get('redirect') ? '/' + searchParams.get('redirect') : '/'
+    const redirect = searchParams.get('redirect') ? searchParams.get('redirect') : '/'
 
     const dispatch = useDispatch()
 
