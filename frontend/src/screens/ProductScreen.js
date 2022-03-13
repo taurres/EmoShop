@@ -59,10 +59,13 @@ const ProductScreen = () => {
             {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : (<>
                 <Meta title={product.name}/>
                 <Row>
-                    <Col md={6}>
-                        <Image src={product.image} alt={product.name} fluid/>
+                    <Col md={12}>
+                        <Image src={product.image} alt={product.name} rounded fluid/>
                     </Col>
-                    <Col md={3}>
+
+                </Row>
+                <Row className="justify-content-center py-2">
+                    <Col md={9}>
                         <ListGroup variant="flush">
                             <ListGroupItem>
                                 <h3>{product.name}</h3>
@@ -129,7 +132,7 @@ const ProductScreen = () => {
                     </Col>
                 </Row>
                 <Row>
-                    <Col md={6}>
+                    <Col md={12}>
                         <h2>Reviews</h2>
                         {product.reviews.length === 0 && <Message>No Reviews</Message>}
                         <ListGroup variant="flush">

@@ -12,7 +12,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 const Paginate = ({page, pages, isAdmin = false, keyword = ''}) => {
     // only show paginate if more than 1 page
     return pages > 1 && (
-        <Pagination>
+        <Pagination className="justify-content-center">
             {[...Array(pages).keys()].map(x => (
                 <LinkContainer
                     key={x + 1}

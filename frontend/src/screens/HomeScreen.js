@@ -30,17 +30,19 @@ const HomeScreen = () => {
         <>
             <Meta/>
             {!keyword ? <ProductCarousel/> : <Link to="/" className="btn btn-primary">Back</Link>}
-            <h1>Latest Products</h1>
+            <h1>Latest Pictures</h1>
             {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : (
                 <>
                     <Row>
                         {products.map(product => (
-                            <Col key={product._id} sm={12} md={6} lg={4}>
+                            <Col key={product._id} sm={12} md={6} lg={4} className="d-flex align-items-stretch">
                                 <Product product={product}/>
                             </Col>
                         ))}
                     </Row>
-                    <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''}/>
+                    <Row>
+                        <Paginate page={page} pages={pages} keyword={keyword ? keyword : ''}/>
+                    </Row>
                 </>
             )}
         </>
