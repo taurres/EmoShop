@@ -21,6 +21,8 @@ h1 {
 }
 
 /* carousel */
+
+
 .carousel-item-next,
 .carousel-item-prev,
 .carousel-item.active {
@@ -40,11 +42,9 @@ h1 {
 
 .carousel img {
     max-height: 700px;
-    /*padding: 30px;*/
-    /*margin: 50px;*/
-    /*!*border-radius: 50%;*!*/
-    /*margin-left: auto;*/
-    /*margin-right: auto;*/
+    width: fit-content;
+    object-fit: cover;
+    align-content: center;
 }
 
 .carousel-control-next-icon {
@@ -59,9 +59,9 @@ h1 {
     margin: 0 auto;
 }
 
-@media (max-width: 900px) {
-    .carousel-caption h2 {
-        font-size: 2.5vw;
-    }
-}
+/*@media (max-width: 900px) {*/
+/*    .carousel-caption h2 {*/
+/*        font-size: 2.5vw;*/
+/*    }*/
+/*}*/
 
