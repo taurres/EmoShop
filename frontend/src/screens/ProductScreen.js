@@ -58,7 +58,7 @@ const ProductScreen = () => {
             <Link className="btn btn-primary my-3" to="/">Back</Link>
             {loading ? <Loader/> : error ? <Message variant="danger">{error}</Message> : (<>
                 <Meta title={product.name}/>
-                <Row>
+                <Row className="justify-content-center">
                     <Col md={12}>
                         <Image src={product.image} alt={product.name} rounded fluid/>
                     </Col>
@@ -74,7 +74,7 @@ const ProductScreen = () => {
                                 <Rating value={product.rating} text={`${product.numReviews} reviews`}/>
                             </ListGroupItem>
                             <ListGroupItem>
-                                Price: ${product.price}
+                                Price: EMO$ {product.price}
                             </ListGroupItem>
                             <ListGroupItem>
                                 {product.description}
@@ -87,7 +87,7 @@ const ProductScreen = () => {
                                 <ListGroupItem variant="flush">
                                     <Row>
                                         <Col>Price</Col>
-                                        <Col>{product.price}</Col>
+                                        <Col>EMO$ {product.price}</Col>
                                     </Row>
                                 </ListGroupItem>
                                 <ListGroupItem variant="flush">

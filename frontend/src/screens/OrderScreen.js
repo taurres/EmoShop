@@ -106,7 +106,8 @@ const OrderScreen = () => {
                                                                 </Link>
                                                             </Col>
                                                             <Col md={4}>
-                                                                {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                                {item.qty} x EMO$ {item.price} =
+                                                                EMO$ {item.qty * item.price}
                                                             </Col>
                                                         </Row>
                                                     </ListGroup.Item>
@@ -126,25 +127,25 @@ const OrderScreen = () => {
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Items</Col>
-                                            <Col>${order.itemsPrice}</Col>
+                                            <Col>EMO$ {order.itemsPrice.toFixed(2)}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Shipping</Col>
-                                            <Col>${order.shippingPrice === 0 ? order.shippingPrice.toFixed(2) : order.shippingPrice}</Col>
+                                            <Col>EMO$ {order.shippingPrice.toFixed(2)}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Tax</Col>
-                                            <Col>${order.taxPrice}</Col>
+                                            <Col>EMO$ {order.taxPrice.toFixed(2)}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Total</Col>
-                                            <Col>${order.totalPrice}</Col>
+                                            <Col>EMO$ {order.totalPrice.toFixed(2)}</Col>
                                         </Row>
                                     </ListGroup.Item>
                                     {!order.isPaid && (

@@ -16,7 +16,7 @@ const PlaceOrderScreen = () => {
     cart.shippingPrice = cart.itemsPrice > 100
         ? Number(0).toFixed(2)
         : Number(10).toFixed(2)
-    cart.taxPrice = Number((0.015 * cart.itemsPrice).toFixed(2))
+    cart.taxPrice = Number((0.015 * cart.itemsPrice)).toFixed(2)
     cart.totalPrice = (Number(cart.itemsPrice) + Number(cart.shippingPrice) + Number(cart.taxPrice)).toFixed(2)
 
     const orderCreate = useSelector(state => state.orderCreate)
@@ -77,7 +77,7 @@ const PlaceOrderScreen = () => {
                                                         </Link>
                                                     </Col>
                                                     <Col md={4}>
-                                                        {item.qty} x ${item.price} = ${item.qty * item.price}
+                                                        {item.qty} x EMO$ {item.price} = EMO$ {item.qty * item.price}
                                                     </Col>
                                                 </Row>
                                             </ListGroup.Item>
@@ -97,25 +97,25 @@ const PlaceOrderScreen = () => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Items</Col>
-                                    <Col>${cart.itemsPrice}</Col>
+                                    <Col>EMO$ {cart.itemsPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Shipping</Col>
-                                    <Col>${cart.shippingPrice}</Col>
+                                    <Col>EMO$ {cart.shippingPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Tax</Col>
-                                    <Col>${cart.taxPrice}</Col>
+                                    <Col>EMO$ {cart.taxPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total</Col>
-                                    <Col>${cart.totalPrice}</Col>
+                                    <Col>EMO$ {cart.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
                         </ListGroup>
