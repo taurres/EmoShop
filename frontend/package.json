@@ -1,6 +1,6 @@
 {
   "name": "emoshop",
-  "proxy": "http://127.0.0.1:5001",
+  "proxy": "http://server:5001",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

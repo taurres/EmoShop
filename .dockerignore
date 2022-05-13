@@ -1,0 +1,8 @@
+# dependencies
+/node_modules
+
+# dev
+/backend/dev
+
+.idea
+.DS_Store
