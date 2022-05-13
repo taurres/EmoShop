@@ -16,7 +16,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 COPY ./backend ./backend
-COPY ./package.json ./package-lock.json .env ./
+COPY ./package.json ./package-lock.json ./
 COPY --from=builder /app/frontend/build/ ./frontend/build/
 RUN npm install
 
