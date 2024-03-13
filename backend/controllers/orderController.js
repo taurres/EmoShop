@@ -1,6 +1,7 @@
 import expressAsyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 
+// order controller
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  private
